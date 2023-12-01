@@ -1,0 +1,153 @@
+@startuml
+abstract class Product {
+    - productId: String
+    - productName: String
+    - productPrice: double
+    - productQuantity: int
+    - manufacturerName: String
+    - supplierName: String
+    + Product(productId: String, productName: String, productPrice: double, productQuantity: int, manufacturerName: String, supplierName: String)
+    + displayInfo(): void
+}
+
+class Computer extends Product {
+    - type: String
+    - configuration: String
+    + Computer(): void
+    + toString(): String
+}
+
+class ComputerList {
+    - computerList: Computer[]
+    - n: int
+    + Add(): void
+    + Remove(): void
+    + Search(): void
+    + Edit(): void
+}
+
+class Mouse extends Product {
+    - type: String
+    + Mouse(): void
+    + toString(): void
+}
+
+class MouseList {
+    - mouseList: Mouse[]
+    - n: int
+    + add(): void
+    + Remove(): void
+    + Search(): void
+    + Edit(): void
+}
+
+class Keyboard extends Product {
+    - type: String
+    + Keyboard(): void
+    + toString(): void
+}
+
+class KeyboardList {
+    - keyboardList: Keyboard[]
+    - n: int
+    + add(): void
+    + Remove(): void
+    + Search(): void
+    + Edit(): void
+}
+
+class ProductList {
+    - cl: ComputerList
+    - ml: MouseList
+    - kl: KeyboardList
+    + readFromFile(): void
+    + writeToFile(): void
+}
+
+interface Displayable {
+    + displayInfo(): void
+}
+
+class Manufacturer {
+    - manufacturerId: int
+    - manufacturerName: String
+    - manufacturerAddress: String
+    + Manufacturer(manufacturerId: int, manufacturerName: String, manufacturerAddress: String)
+    + displayInfo(): void
+    + additionalManufacturerMethod(): void
+}
+
+class Supplier {
+    - supplierId: int
+    - supplierName: String
+    - supplierAddress: String
+    + Supplier(supplierId: int, supplierName: String, supplierAddress: String)
+    + displayInfo(): void
+    + additionalSupplierMethod(): void
+}
+
+class Order {
+    - orderId: int
+    - customer: Customer
+    - productList: ProductList
+    + Order(orderId: int, customer: Customer, productList: ProductList)
+    + DisplayInfoOrder(): void
+    + Total(): double
+}
+
+class Payment implements Displayable {
+    - paymentId: int
+    - statusPayment: boolean
+    + Payment(paymentId: int, statusPayment: boolean)
+    + DisplayInfo(): void
+}
+
+class Invoice implements Displayable {
+    - invoiceId: int
+    - order: Order
+    - payment: Payment
+    + Invoice(invoiceId: int, order: Order, payment: Payment)
+    + CreateInvoice(): void
+    + DisplayInfoInvoice(): void
+}
+
+class Warranty implements Displayable {
+    - warrantyId: int
+    - warrantyTime: int
+    + Warranty(warrantyId: int, warrantyTime: int)
+    + DisplayInfo(): void
+}
+
+class Customer implements Displayable {
+    - customerId: int
+    - customerName: String
+    - customerAddress: String
+    + Customer(customerId: int, customerName: String, customerAddress: String, customerPhone: String)
+    + DisplayInfo(): void
+}
+
+class VipCustomer extends Customer {
+    + VipCustomer(customerId: int, customerName: String, customerAddress: String, customerPhone: String)
+    + DisplayInfo(): void
+}
+
+class RegularCustomer extends Customer {
+    + RegularCustomer(customerId: int, customerName: String, customerAddress: String, customerPhone: String)
+    + DisplayInfo(): void
+}
+
+abstract class Employee implements Displayable {
+    - employeeId: int
+    - employeeName: String
+    - employeeAddress: String
+    - employeePhone: double
+    + Employee(employeeId: int, employeeName: String, employeeAddress: String)
+    + DisplayInfo(): void
+}
+
+class Cashier extends Employee {}
+
+class Manager extends Employee {}
+
+class Saler extends Employee {}
+@enduml
